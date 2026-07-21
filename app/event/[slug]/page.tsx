@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CalendarDays, MapPin, Clock, Wallet, Star } from "lucide-react";
+import { ArrowLeft, CalendarDays, MapPin, Clock, Wallet } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -35,7 +35,6 @@ export default async function EventDetailPage({
   if (!event) notFound();
 
   const item = event as EventItem;
-  const descLines = item.description.split("\n").filter(Boolean);
 
   return (
     <main>
@@ -93,14 +92,10 @@ export default async function EventDetailPage({
             <h2 className="font-display text-lg font-semibold text-ink">
               Deskripsi
             </h2>
-            <ul className="mt-4 space-y-2.5">
-              {descLines.map((line, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-ink-soft">
-                  <Star size={16} className="mt-1 shrink-0 fill-tosca text-tosca" />
-                  <span>{line}</span>
-                </li>
-              ))}
-            </ul>
+            <div
+              className="rich-content mt-4 text-ink-soft"
+              dangerouslySetInnerHTML={{ __html: item.description }}
+            />
           </div>
 
           <a

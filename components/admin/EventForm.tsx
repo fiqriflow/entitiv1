@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { EventItem, Gender } from "@/types/event";
 import { GENDER_OPTIONS } from "@/types/event";
+import RichTextEditor from "./RichTextEditor";
 
 function slugify(text: string) {
   return text
@@ -53,6 +54,13 @@ export default function EventForm({
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    const isDescriptionEmpty = description.replace(/<[^>]*>/g, "").trim() === "";
+    if (isDescriptionEmpty) {
+      setError("Deskripsi tidak boleh kosong.");
+      return;
+    }
+
     setSaving(true);
     setError(null);
 
@@ -195,14 +203,11 @@ export default function EventForm({
             </select>
           </Field>
 
-          <Field label="Deskripsi (1 baris = 1 poin)">
-            <textarea
-              required
-              rows={4}
+          <Field label="Deskripsi">
+            <RichTextEditor
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              className="focus-ring w-full rounded-lg border border-black/10 px-3.5 py-2.5 text-sm"
-              placeholder={"Shuttlecock disediakan\nSistem: 2 Service 2x15"}
+              onChange={setDescription}
+              placeholder="Tulis deskripsi event... gunakan toolbar untuk bold, italic, atau bullet list"
             />
           </Field>
 

@@ -114,6 +114,16 @@ create policy "Admin bisa hapus banner"
   using ( bucket_id = 'event-banners' );
 
 -- ============================================
+-- Migrasi: convert deskripsi lama (teks biasa per baris) ke format HTML
+-- Cuma jalan kalau deskripsinya BELUM pernah diedit ulang lewat WYSIWYG
+-- editor baru (dideteksi dari belum adanya tag HTML sama sekali)
+-- ============================================
+update public.events
+set description = '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>'
+where slug in ('skuy-mabar-with-bascom-1', 'skuy-mabar-with-bascom-2', 'skuy-mabar-with-bascom-3')
+  and description not like '%<%';
+
+-- ============================================
 -- Seed data 3 event awal (isi dari data Entiti Badminton)
 -- Aman dijalankan berkali-kali: skip kalau slug sudah ada
 -- ============================================
@@ -129,7 +139,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
-    E'Shuttlecock disediakan\nKesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)\nSistem: 2 Service 2x15\nMatch Format: Penyesuaian',
+    '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event1.png',
     'https://forms.gle/f9m86U9oxB9MpYs1A',
     true
@@ -143,7 +153,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
-    E'Shuttlecock disediakan\nKesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)\nSistem: 2 Service 2x15\nMatch Format: Penyesuaian',
+    '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event2.png',
     'https://forms.gle/f9m86U9oxB9MpYs1A',
     true
@@ -157,7 +167,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
-    E'Shuttlecock disediakan\nKesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)\nSistem: 2 Service 2x15\nMatch Format: Penyesuaian',
+    '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event3.png',
     'https://forms.gle/f9m86U9oxB9MpYs1A',
     true
