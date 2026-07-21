@@ -266,11 +266,11 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="block">
+    <div className="block">
       <span className="mb-1.5 block text-sm font-medium text-ink">
         {label}
       </span>
       {children}
-    </label>
+    </div>
   );
 }

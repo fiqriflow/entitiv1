@@ -92,7 +92,7 @@ function ToolbarButton({
       // sebelum command dijalankan
       onMouseDown={(e) => e.preventDefault()}
       onClick={onClick}
-      className="focus-ring rounded p-1.5 text-ink-soft transition-colors hover:bg-black/5 hover:text-ink"
+      className="focus-ring select-none rounded p-2 text-ink-soft transition-colors hover:bg-black/5 hover:text-ink"
     >
       {children}
     </button>
