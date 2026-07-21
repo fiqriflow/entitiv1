@@ -1,0 +1,36 @@
+import Image from "next/image";
+import Link from "next/link";
+
+export default function Navbar() {
+  return (
+    <header className="sticky top-0 z-50 border-b border-black/5 bg-court/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo/logodark.svg"
+            alt="Entiti Badminton Community"
+            width={40}
+            height={40}
+            className="h-10 w-auto"
+          />
+        </Link>
+
+        <nav className="hidden items-center gap-8 font-body text-sm font-medium text-ink-soft md:flex">
+          <a href="#event" className="transition-colors hover:text-tosca">
+            Event
+          </a>
+          <a href="#tentang" className="transition-colors hover:text-tosca">
+            Tentang Kami
+          </a>
+        </nav>
+
+        <a
+          href="#event"
+          className="focus-ring rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-tosca"
+        >
+          Gabung Mabar
+        </a>
+      </div>
+    </header>
+  );
+}
