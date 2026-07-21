@@ -35,7 +35,7 @@ export default function Hero() {
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <a
-            href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
+            href="https://whatsapp.com/channel/0029VbCDMFI5q08iB1iXAd1T"
             target="_blank"
             rel="noopener noreferrer"
             className="focus-ring rounded-full bg-tosca px-7 py-3.5 text-center font-semibold text-ink transition-transform hover:scale-[1.02] hover:bg-tosca-dark hover:text-white"

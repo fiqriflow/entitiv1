@@ -6,7 +6,7 @@ export default function CTASection() {
           Siap gaskeun mabar bareng Entiti?
         </h2>
         <a
-          href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
+          href="https://whatsapp.com/channel/0029VbCDMFI5q08iB1iXAd1T"
           target="_blank"
           rel="noopener noreferrer"
           className="focus-ring shrink-0 rounded-full bg-ink px-8 py-4 text-center font-semibold text-white transition-transform hover:scale-[1.03]"
