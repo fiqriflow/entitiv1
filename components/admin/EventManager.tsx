@@ -34,16 +34,17 @@ export default function EventManager({
     setEditing(null);
   }
 
-  async function toggleActive(event: EventItem) {
+  async function toggleField(
+    event: EventItem,
+    field: "is_active" | "registration_open"
+  ) {
     setBusyId(event.id);
     setEvents((prev) =>
-      prev.map((e) =>
-        e.id === event.id ? { ...e, is_active: !e.is_active } : e
-      )
+      prev.map((e) => (e.id === event.id ? { ...e, [field]: !e[field] } : e))
     );
     const { error } = await supabase
       .from("events")
-      .update({ is_active: !event.is_active })
+      .update({ [field]: !event[field] })
       .eq("id", event.id);
 
     setBusyId(null);
@@ -51,7 +52,7 @@ export default function EventManager({
       // rollback kalau gagal
       setEvents((prev) =>
         prev.map((e) =>
-          e.id === event.id ? { ...e, is_active: event.is_active } : e
+          e.id === event.id ? { ...e, [field]: event[field] } : e
         )
       );
     }
@@ -98,13 +99,14 @@ export default function EventManager({
               <th className="px-5 py-3 font-medium">Event</th>
               <th className="px-5 py-3 font-medium">Tanggal</th>
               <th className="px-5 py-3 font-medium">Status</th>
+              <th className="px-5 py-3 font-medium">Pendaftaran</th>
               <th className="px-5 py-3 font-medium text-right">Aksi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-black/5">
             {events.length === 0 && (
               <tr>
-                <td colSpan={4} className="px-5 py-10 text-center text-ink-soft">
+                <td colSpan={5} className="px-5 py-10 text-center text-ink-soft">
                   Belum ada event. Klik &quot;Tambah Event&quot; untuk mulai.
                 </td>
               </tr>
@@ -119,23 +121,22 @@ export default function EventManager({
                   {formatTanggal(event.event_date)}
                 </td>
                 <td className="px-5 py-4">
-                  <button
-                    type="button"
-                    onClick={() => toggleActive(event)}
+                  <ToggleSwitch
+                    checked={event.is_active}
                     disabled={busyId === event.id}
-                    className={`focus-ring relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border-0 p-0 leading-none outline-none transition-colors [appearance:none] disabled:cursor-not-allowed ${
-                      event.is_active ? "bg-tosca" : "bg-black/15"
-                    }`}
-                    aria-label={
-                      event.is_active ? "Nonaktifkan event" : "Aktifkan event"
-                    }
-                  >
-                    <span
-                      className={`inline-block h-5 w-5 shrink-0 rounded-full bg-white shadow transition-transform will-change-transform ${
-                        event.is_active ? "translate-x-[22px]" : "translate-x-0.5"
-                      }`}
-                    />
-                  </button>
+                    onChange={() => toggleField(event, "is_active")}
+                    labelOn="Nonaktifkan event"
+                    labelOff="Aktifkan event"
+                  />
+                </td>
+                <td className="px-5 py-4">
+                  <ToggleSwitch
+                    checked={event.registration_open}
+                    disabled={busyId === event.id}
+                    onChange={() => toggleField(event, "registration_open")}
+                    labelOn="Tutup pendaftaran"
+                    labelOff="Buka pendaftaran"
+                  />
                 </td>
                 <td className="px-5 py-4">
                   <div className="flex justify-end gap-2">
@@ -172,5 +173,37 @@ export default function EventManager({
         />
       )}
     </div>
+  );
+}
+
+function ToggleSwitch({
+  checked,
+  disabled,
+  onChange,
+  labelOn,
+  labelOff,
+}: {
+  checked: boolean;
+  disabled?: boolean;
+  onChange: () => void;
+  labelOn: string;
+  labelOff: string;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onChange}
+      disabled={disabled}
+      className={`focus-ring relative inline-flex h-6 w-11 shrink-0 items-center rounded-full border-0 p-0 leading-none outline-none transition-colors [appearance:none] disabled:cursor-not-allowed ${
+        checked ? "bg-tosca" : "bg-black/15"
+      }`}
+      aria-label={checked ? labelOn : labelOff}
+    >
+      <span
+        className={`inline-block h-5 w-5 shrink-0 rounded-full bg-white shadow transition-transform will-change-transform ${
+          checked ? "translate-x-[22px]" : "translate-x-0.5"
+        }`}
+      />
+    </button>
   );
 }

@@ -36,6 +36,9 @@ export default function EventForm({
   const [price, setPrice] = useState(initial?.price ?? "Rp25.000/orang");
   const [level, setLevel] = useState(initial?.level ?? "Beginner - Intermediate");
   const [gender, setGender] = useState<Gender>(initial?.gender ?? "Campuran");
+  const [registrationOpen, setRegistrationOpen] = useState(
+    initial?.registration_open ?? true
+  );
   const [description, setDescription] = useState(initial?.description ?? "");
   const [registerUrl, setRegisterUrl] = useState(initial?.register_url ?? "");
   const [bannerFile, setBannerFile] = useState<File | null>(null);
@@ -90,6 +93,7 @@ export default function EventForm({
         price,
         level,
         gender,
+        registration_open: registrationOpen,
         description,
         register_url: registerUrl,
         banner_url: bannerUrl,
@@ -201,6 +205,33 @@ export default function EventForm({
                 </option>
               ))}
             </select>
+          </Field>
+
+          <Field label="Pendaftaran">
+            <button
+              type="button"
+              onClick={() => setRegistrationOpen((v) => !v)}
+              className={`focus-ring flex w-full items-center justify-between rounded-lg border border-black/10 px-3.5 py-2.5 text-sm ${
+                registrationOpen ? "bg-tosca-light/60" : "bg-court"
+              }`}
+            >
+              <span className="font-medium text-ink">
+                {registrationOpen
+                  ? "Dibuka — tombol Join Mabar aktif"
+                  : "Ditutup — tombol Join Mabar nonaktif"}
+              </span>
+              <span
+                className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+                  registrationOpen ? "bg-tosca" : "bg-black/15"
+                }`}
+              >
+                <span
+                  className={`inline-block h-5 w-5 shrink-0 translate-x-0.5 rounded-full bg-white shadow transition-transform will-change-transform ${
+                    registrationOpen ? "translate-x-[22px]" : ""
+                  }`}
+                />
+              </span>
+            </button>
           </Field>
 
           <Field label="Deskripsi">

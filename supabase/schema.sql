@@ -15,6 +15,7 @@ create table if not exists public.events (
   level text not null,
   gender text not null default 'Campuran'
     check (gender in ('Campuran', 'Girl/Woman Only', 'Boy/Man Only')),
+  registration_open boolean not null default true,
   description text not null,
   banner_url text,
   register_url text not null,
@@ -27,6 +28,9 @@ create table if not exists public.events (
 -- (aman di-skip kalau kolom gender sudah ada)
 alter table public.events
   add column if not exists gender text not null default 'Campuran';
+
+alter table public.events
+  add column if not exists registration_open boolean not null default true;
 
 do $$
 begin
@@ -135,7 +139,7 @@ where slug in ('skuy-mabar-with-bascom-1', 'skuy-mabar-with-bascom-2', 'skuy-mab
 -- Aman dijalankan berkali-kali: skip kalau slug sudah ada
 -- ============================================
 insert into public.events
-  (slug, title, location, event_date, event_time, price, level, gender, description, banner_url, register_url, is_active)
+  (slug, title, location, event_date, event_time, price, level, gender, registration_open, description, banner_url, register_url, is_active)
 values
   (
     'skuy-mabar-with-bascom-1',
@@ -146,6 +150,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
+    true,
     '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event1.png',
     'https://forms.gle/f9m86U9oxB9MpYs1A',
@@ -160,6 +165,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
+    true,
     '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event2.png',
     'https://forms.gle/f9m86U9oxB9MpYs1A',
@@ -174,6 +180,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
+    true,
     '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event3.png',
     'https://forms.gle/f9m86U9oxB9MpYs1A',

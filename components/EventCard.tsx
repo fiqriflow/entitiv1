@@ -28,6 +28,11 @@ export default function EventCard({ event }: { event: EventItem }) {
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         )}
+        {!event.registration_open && (
+          <span className="absolute left-3 top-3 rounded-full bg-ink/85 px-3 py-1 text-xs font-semibold text-white">
+            Pendaftaran Ditutup
+          </span>
+        )}
         <div className="absolute right-3 top-3 flex flex-col items-end gap-1.5">
           <span className="rounded-full bg-tosca px-3 py-1 text-xs font-semibold text-ink">
             {event.level}

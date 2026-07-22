@@ -23,6 +23,7 @@ export interface EventItem {
   price: string;
   level: string;
   gender: Gender;
+  registration_open: boolean;
   description: string;
   banner_url: string | null;
   register_url: string;

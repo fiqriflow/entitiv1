@@ -98,14 +98,23 @@ export default async function EventDetailPage({
             />
           </div>
 
-          <a
-            href={item.register_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="focus-ring mt-10 block w-full rounded-full bg-tosca py-4 text-center font-display font-semibold text-ink transition-transform hover:scale-[1.01] hover:bg-tosca-dark hover:text-white sm:w-auto sm:px-10"
-          >
-            Join Mabar
-          </a>
+          {item.registration_open ? (
+            <a
+              href={item.register_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="focus-ring mt-10 block w-full rounded-full bg-tosca py-4 text-center font-display font-semibold text-ink transition-transform hover:scale-[1.01] hover:bg-tosca-dark hover:text-white sm:w-auto sm:px-10"
+            >
+              Join Mabar
+            </a>
+          ) : (
+            <div
+              aria-disabled="true"
+              className="mt-10 block w-full cursor-not-allowed rounded-full bg-black/10 py-4 text-center font-display font-semibold text-ink-soft sm:w-auto sm:px-10"
+            >
+              Pendaftaran Ditutup
+            </div>
+          )}
         </div>
       </section>
 
