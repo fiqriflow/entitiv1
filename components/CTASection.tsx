@@ -1,3 +1,5 @@
+import TrackedLink from "./TrackedLink";
+
 export default function CTASection() {
   return (
     <section className="bg-diagonal-tosca">
@@ -5,14 +7,15 @@ export default function CTASection() {
         <h2 className="font-display max-w-lg text-3xl font-semibold leading-tight text-ink md:text-4xl">
           Siap gaskeun mabar bareng Entiti?
         </h2>
-        <a
-          href="https://whatsapp.com/channel/0029VbCDMFI5q08iB1iXAd1T"
+        <TrackedLink
+          href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
+          eventLabel="wa_channel_cta"
           target="_blank"
           rel="noopener noreferrer"
           className="focus-ring shrink-0 rounded-full bg-ink px-8 py-4 text-center font-semibold text-white transition-transform hover:scale-[1.03]"
         >
           Follow WA Channel Sekarang
-        </a>
+        </TrackedLink>
       </div>
     </section>
   );

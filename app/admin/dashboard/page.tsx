@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import EventManager from "@/components/admin/EventManager";
 import LogoutButton from "@/components/admin/LogoutButton";
+import StatsOverview from "@/components/admin/StatsOverview";
 import type { EventItem } from "@/types/event";
 
 export default async function AdminDashboardPage() {
@@ -42,6 +43,7 @@ export default async function AdminDashboardPage() {
       </header>
 
       <div className="mx-auto max-w-5xl px-6 py-10">
+        <StatsOverview />
         <EventManager initialEvents={(events ?? []) as EventItem[]} />
       </div>
     </main>

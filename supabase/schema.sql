@@ -114,6 +114,34 @@ create policy "Admin bisa hapus banner"
   using ( bucket_id = 'event-banners' );
 
 -- ============================================
+-- Tabel analytics: tracking total pengunjung & klik CTA
+-- ============================================
+create table if not exists public.analytics_events (
+  id uuid primary key default gen_random_uuid(),
+  event_type text not null check (event_type in ('page_view', 'cta_click')),
+  event_label text not null default 'general',
+  created_at timestamptz not null default now()
+);
+
+create index if not exists idx_analytics_events_type_created
+  on public.analytics_events (event_type, created_at);
+
+alter table public.analytics_events enable row level security;
+
+-- Siapa aja (termasuk pengunjung yang belum login) boleh CATAT event,
+-- tapi cuma admin (login) yang boleh BACA datanya di dashboard.
+drop policy if exists "Publik bisa catat event analytics" on public.analytics_events;
+create policy "Publik bisa catat event analytics"
+  on public.analytics_events for insert
+  with check ( true );
+
+drop policy if exists "Admin bisa lihat data analytics" on public.analytics_events;
+create policy "Admin bisa lihat data analytics"
+  on public.analytics_events for select
+  to authenticated
+  using ( true );
+
+-- ============================================
 -- Migrasi: convert deskripsi lama (teks biasa per baris) ke format HTML
 -- Cuma jalan kalau deskripsinya BELUM pernah diedit ulang lewat WYSIWYG
 -- editor baru (dideteksi dari belum adanya tag HTML sama sekali)

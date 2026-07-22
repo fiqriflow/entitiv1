@@ -5,6 +5,7 @@ import { ArrowLeft, CalendarDays, MapPin, Clock, Wallet } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import TrackedLink from "@/components/TrackedLink";
 import type { EventItem } from "@/types/event";
 import { GENDER_CHIP_STYLES } from "@/types/event";
 
@@ -98,14 +99,15 @@ export default async function EventDetailPage({
             />
           </div>
 
-          <a
+          <TrackedLink
             href={item.register_url}
+            eventLabel={`event_register:${item.slug}`}
             target="_blank"
             rel="noopener noreferrer"
             className="focus-ring mt-10 block w-full rounded-full bg-tosca py-4 text-center font-display font-semibold text-ink transition-transform hover:scale-[1.01] hover:bg-tosca-dark hover:text-white sm:w-auto sm:px-10"
           >
             Join Mabar
-          </a>
+          </TrackedLink>
         </div>
       </section>
 

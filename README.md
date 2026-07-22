@@ -58,7 +58,17 @@ Buka `http://localhost:3000` untuk landing page, dan `http://localhost:3000/admi
 
 Setelah deploy selesai, website kamu langsung live, dan panel admin ada di `/admin/login`.
 
-## 6. Struktur folder singkat
+## 8. Statistik pengunjung & klik CTA
+
+Ada tabel baru `analytics_events` (sudah termasuk di `schema.sql`) yang otomatis mencatat:
+- **Total Pengunjung** — setiap kali landing page (`/`) dibuka
+- **Total Klik CTA** — setiap klik tombol "Follow WA Channel" (di Hero & CTA akhir) dan tombol "Join Mabar" di tiap halaman detail event
+
+Semua ini muncul otomatis di `/admin/dashboard`, lengkap dengan rincian per tombol (bar chart sederhana). Publik cuma bisa "menulis" data ini (nggak bisa baca), sementara data lengkapnya cuma bisa dilihat admin yang login — diatur lewat RLS di Supabase.
+
+Nggak perlu setup tambahan apa-apa selain jalanin `schema.sql` yang sudah diupdate.
+
+## 9. Struktur folder singkat
 
 ```
 app/

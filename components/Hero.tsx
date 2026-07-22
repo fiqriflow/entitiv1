@@ -1,3 +1,5 @@
+import TrackedLink from "./TrackedLink";
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-ink">
@@ -34,14 +36,15 @@ export default function Hero() {
         </p>
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <a
-            href="https://whatsapp.com/channel/0029VbCDMFI5q08iB1iXAd1T"
+          <TrackedLink
+            href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
+            eventLabel="wa_channel_hero"
             target="_blank"
             rel="noopener noreferrer"
             className="focus-ring rounded-full bg-tosca px-7 py-3.5 text-center font-semibold text-ink transition-transform hover:scale-[1.02] hover:bg-tosca-dark hover:text-white"
           >
             Follow WA Channel Sekarang
-          </a>
+          </TrackedLink>
           <a
             href="#event"
             className="focus-ring rounded-full border border-white/25 px-7 py-3.5 text-center font-semibold text-white transition-colors hover:border-white/60"
