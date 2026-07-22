@@ -7,7 +7,7 @@ export default function AboutSection() {
             Tentang Kami
           </span>
           <h2 className="font-display mt-3 text-3xl font-semibold leading-tight text-ink md:text-4xl">
-            Komunitas Badminton Ciamis yang Ramah untuk Semua Level
+            Komunitas Badminton dari Ciamis Manis
           </h2>
         </div>
         <p className="text-lg leading-relaxed text-ink-soft">
