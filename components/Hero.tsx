@@ -37,7 +37,7 @@ export default function Hero() {
 
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           <TrackedLink
-            href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
+            href="https://whatsapp.com/channel/0029VbCDMFI5q08iB1iXAd1T"
             eventLabel="wa_channel_hero"
             target="_blank"
             rel="noopener noreferrer"

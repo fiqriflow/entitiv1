@@ -8,7 +8,7 @@ export default function CTASection() {
           Siap gaskeun mabar bareng Entiti?
         </h2>
         <TrackedLink
-          href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
+          href="https://whatsapp.com/channel/0029VbCDMFI5q08iB1iXAd1T"
           eventLabel="wa_channel_cta"
           target="_blank"
           rel="noopener noreferrer"
