@@ -39,6 +39,7 @@ export default function EventForm({
   const [registrationOpen, setRegistrationOpen] = useState(
     initial?.registration_open ?? true
   );
+  const [showOnHome, setShowOnHome] = useState(initial?.show_on_home ?? true);
   const [description, setDescription] = useState(initial?.description ?? "");
   const [registerUrl, setRegisterUrl] = useState(initial?.register_url ?? "");
   const [bannerFile, setBannerFile] = useState<File | null>(null);
@@ -94,6 +95,7 @@ export default function EventForm({
         level,
         gender,
         registration_open: registrationOpen,
+        show_on_home: showOnHome,
         description,
         register_url: registerUrl,
         banner_url: bannerUrl,
@@ -228,6 +230,33 @@ export default function EventForm({
                 <span
                   className={`inline-block h-5 w-5 shrink-0 translate-x-0.5 rounded-full bg-white shadow transition-transform will-change-transform ${
                     registrationOpen ? "translate-x-[22px]" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </Field>
+
+          <Field label="Section Event di Home">
+            <button
+              type="button"
+              onClick={() => setShowOnHome((v) => !v)}
+              className={`focus-ring flex w-full items-center justify-between rounded-lg border border-black/10 px-3.5 py-2.5 text-sm ${
+                showOnHome ? "bg-tosca-light/60" : "bg-court"
+              }`}
+            >
+              <span className="font-medium text-ink">
+                {showOnHome
+                  ? "Tampil di section Event landing page"
+                  : "Disembunyikan dari landing page"}
+              </span>
+              <span
+                className={`relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors ${
+                  showOnHome ? "bg-tosca" : "bg-black/15"
+                }`}
+              >
+                <span
+                  className={`inline-block h-5 w-5 shrink-0 translate-x-0.5 rounded-full bg-white shadow transition-transform will-change-transform ${
+                    showOnHome ? "translate-x-[22px]" : ""
                   }`}
                 />
               </span>

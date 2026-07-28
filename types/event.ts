@@ -24,6 +24,7 @@ export interface EventItem {
   level: string;
   gender: Gender;
   registration_open: boolean;
+  show_on_home: boolean;
   description: string;
   banner_url: string | null;
   register_url: string;

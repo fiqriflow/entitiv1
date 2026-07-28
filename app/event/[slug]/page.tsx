@@ -42,7 +42,7 @@ export default async function EventDetailPage({
 
       <div className="mx-auto max-w-6xl px-6 py-8">
         <Link
-          href="/#event"
+          href="/event"
           className="focus-ring inline-flex items-center gap-2 text-sm font-medium text-ink-soft transition-colors hover:text-tosca"
         >
           <ArrowLeft size={16} />

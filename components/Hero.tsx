@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section className="relative overflow-hidden bg-ink">
@@ -42,12 +44,12 @@ export default function Hero() {
           >
             Follow WA Channel Sekarang
           </a>
-          <a
-            href="#event"
+          <Link
+            href="/event"
             className="focus-ring rounded-full border border-white/25 px-7 py-3.5 text-center font-semibold text-white transition-colors hover:border-white/60"
           >
             Lihat Kategori / Event
-          </a>
+          </Link>
         </div>
       </div>
     </section>

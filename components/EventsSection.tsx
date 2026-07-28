@@ -1,5 +1,7 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
-import EventCard from "./EventCard";
+import EventInfoCard from "./EventInfoCard";
 import type { EventItem } from "@/types/event";
 
 export default async function EventsSection() {
@@ -8,6 +10,7 @@ export default async function EventsSection() {
     .from("events")
     .select("*")
     .eq("is_active", true)
+    .eq("show_on_home", true)
     .order("event_date", { ascending: true });
 
   const list = (events ?? []) as EventItem[];
@@ -15,13 +18,22 @@ export default async function EventsSection() {
   return (
     <section id="event" className="bg-tosca-light/40 py-24">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="mb-12 max-w-xl">
-          <span className="font-display text-sm font-semibold uppercase tracking-widest text-tosca">
-            Event Kami
-          </span>
-          <h2 className="font-display mt-3 text-3xl font-semibold leading-tight text-ink md:text-4xl">
-            Event Berlangsung Minggu Ini
-          </h2>
+        <div className="mb-12 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+          <div className="max-w-xl">
+            <span className="font-display text-sm font-semibold uppercase tracking-widest text-tosca">
+              Event Kami
+            </span>
+            <h2 className="font-display mt-3 text-3xl font-semibold leading-tight text-ink md:text-4xl">
+              Event Berlangsung Minggu Ini
+            </h2>
+          </div>
+          <Link
+            href="/event"
+            className="focus-ring flex shrink-0 items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-tosca hover:text-ink"
+          >
+            Lihat Semua Event
+            <ArrowRight size={15} />
+          </Link>
         </div>
 
         {list.length === 0 ? (
@@ -32,7 +44,7 @@ export default async function EventsSection() {
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {list.map((event) => (
-              <EventCard key={event.id} event={event} />
+              <EventInfoCard key={event.id} event={event} />
             ))}
           </div>
         )}

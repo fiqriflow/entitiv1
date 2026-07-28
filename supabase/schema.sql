@@ -16,6 +16,7 @@ create table if not exists public.events (
   gender text not null default 'Campuran'
     check (gender in ('Campuran', 'Girl/Woman Only', 'Boy/Man Only')),
   registration_open boolean not null default true,
+  show_on_home boolean not null default true,
   description text not null,
   banner_url text,
   register_url text not null,
@@ -31,6 +32,9 @@ alter table public.events
 
 alter table public.events
   add column if not exists registration_open boolean not null default true;
+
+alter table public.events
+  add column if not exists show_on_home boolean not null default true;
 
 do $$
 begin
@@ -139,7 +143,7 @@ where slug in ('skuy-mabar-with-bascom-1', 'skuy-mabar-with-bascom-2', 'skuy-mab
 -- Aman dijalankan berkali-kali: skip kalau slug sudah ada
 -- ============================================
 insert into public.events
-  (slug, title, location, event_date, event_time, price, level, gender, registration_open, description, banner_url, register_url, is_active)
+  (slug, title, location, event_date, event_time, price, level, gender, registration_open, show_on_home, description, banner_url, register_url, is_active)
 values
   (
     'skuy-mabar-with-bascom-1',
@@ -150,6 +154,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
+    true,
     true,
     '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event1.png',
@@ -166,6 +171,7 @@ values
     'Beginner - Intermediate',
     'Campuran',
     true,
+    true,
     '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event2.png',
     'https://forms.gle/f9m86U9oxB9MpYs1A',
@@ -180,6 +186,7 @@ values
     'Rp25.000/orang',
     'Beginner - Intermediate',
     'Campuran',
+    true,
     true,
     '<ul><li>Shuttlecock disediakan</li><li>Kesempatan bermain lebih dari 2 kali (disesuaikan dengan jumlah peserta)</li><li>Sistem: 2 Service 2x15</li><li>Match Format: Penyesuaian</li></ul>',
     '/events/event3.png',

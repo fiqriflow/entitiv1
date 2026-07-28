@@ -78,7 +78,7 @@ export default function EventManager({
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h2 className="font-display text-lg font-semibold text-ink">
-          Event Berlangsung Minggu Ini
+          Semua Event (Halaman /event)
         </h2>
         <button
           onClick={() => {

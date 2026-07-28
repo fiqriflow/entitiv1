@@ -58,30 +58,49 @@ Buka `http://localhost:3000` untuk landing page, dan `http://localhost:3000/admi
 
 Setelah deploy selesai, website kamu langsung live, dan panel admin ada di `/admin/login`.
 
-## 8. Statistik pengunjung & klik CTA
+## 8. Google Analytics
 
-Ada tabel baru `analytics_events` (sudah termasuk di `schema.sql`) yang otomatis mencatat:
-- **Total Pengunjung** — setiap kali landing page (`/`) dibuka
-- **Total Klik CTA** — setiap klik tombol "Follow WA Channel" (di Hero & CTA akhir) dan tombol "Join Mabar" di tiap halaman detail event
+Website ini pakai Google Analytics (GA4) buat tracking pengunjung, bukan sistem custom — biar datanya lengkap (unique visitor, sumber traffic, demografi, dll) tanpa perlu bikin dashboard sendiri.
 
-Semua ini muncul otomatis di `/admin/dashboard`, lengkap dengan rincian per tombol (bar chart sederhana). Publik cuma bisa "menulis" data ini (nggak bisa baca), sementara data lengkapnya cuma bisa dilihat admin yang login — diatur lewat RLS di Supabase.
+**Setup:**
+1. Buka [analytics.google.com](https://analytics.google.com) → buat property baru buat website kamu
+2. Pas setup, pilih platform **Web**, masukin URL `entiti.web.id`
+3. Nanti kamu dapat **Measurement ID**, formatnya `G-XXXXXXXXXX`
+4. Tambahin ke `.env.local`:
+   ```
+   NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+   ```
+5. Tambahin juga environment variable yang sama di Vercel: **Settings → Environment Variables** → `NEXT_PUBLIC_GA_ID` = `G-XXXXXXXXXX`
+6. Redeploy (bisa lewat `git push` kosong atau klik **Redeploy** di Vercel)
 
-Nggak perlu setup tambahan apa-apa selain jalanin `schema.sql` yang sudah diupdate.
+Setelah itu, buka dashboard Google Analytics kamu — data pengunjung mulai masuk beberapa menit setelah ada yang buka website kamu. Nggak perlu ubah kode apa-apa lagi, tinggal isi env variable-nya aja.
 
 ## 9. Struktur folder singkat
 
 ```
 app/
-  page.tsx                 → landing page
+  page.tsx                 → landing page (section Event = preview info-only)
+  event/page.tsx           → halaman daftar semua event (bisa diklik + daftar)
   event/[slug]/page.tsx    → halaman detail event
   admin/login/page.tsx     → login admin
-  admin/dashboard/page.tsx → panel admin (CRUD + toggle)
+  admin/dashboard/page.tsx → panel admin (2 tab: Halaman Event & Section Event Home)
 components/                → semua komponen UI
 components/admin/          → komponen khusus panel admin
 lib/supabase/              → koneksi ke Supabase (browser, server, middleware)
 supabase/schema.sql        → skema database + seed data
 ```
 
-## 7. Cara kerja toggle aktif/nonaktif
+## 10. Cara kerja toggle & 2 tab admin
 
-Section "Event Berlangsung Minggu Ini" di landing page hanya menampilkan event dengan status **aktif**. Kalau kamu nonaktifkan event lewat toggle di admin, event itu otomatis hilang dari landing page (tanpa perlu dihapus datanya) — bisa diaktifkan lagi kapan saja.
+Ada 3 toggle per event, semuanya independen satu sama lain:
+
+| Toggle | Fungsi |
+|---|---|
+| **Status** | Event aktif/nonaktif — kalau nonaktif, hilang total dari `/event` dan dari landing page |
+| **Pendaftaran** | Tombol "Join Mabar" di halaman detail aktif/nonaktif (event tetap tampil) |
+| **Section Event Home** | Event ikut tampil di preview landing page atau nggak (tetap ada di `/event` kalau aktif) |
+
+Di dashboard admin ada 2 tab:
+- **Halaman Event** — kelola semua event: tambah, edit, hapus, toggle Status & Pendaftaran. Ini yang nentuin isi halaman `/event`.
+- **Section Event (Home)** — cuma atur toggle "Tampil di Home", buat milih event mana yang muncul di preview landing page. Event yang nonaktif (Status off) otomatis nggak bisa ditampilkan di sini juga, meski toggle-nya dinyalain.
+
