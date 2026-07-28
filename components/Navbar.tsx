@@ -7,12 +7,12 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo/logodark.svg"
-            alt="Entiti Badminton Community"
-            width={40}
-            height={40}
-            className="h-10 w-auto"
-          />
+                    src="/logo/logodark.svg"
+                    alt="Entiti Badminton Community"
+                    width={32}
+                    height={32}
+                    className="h-8 w-auto"
+                  />
         </Link>
 
         <nav className="hidden items-center gap-8 font-body text-sm font-medium text-ink-soft md:flex">
