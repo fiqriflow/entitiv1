@@ -58,7 +58,7 @@ Buka `http://localhost:3000` untuk landing page, dan `http://localhost:3000/admi
 
 Setelah deploy selesai, website kamu langsung live, dan panel admin ada di `/admin/login`.
 
-## 8. Google Analytics
+## 6. Google Analytics
 
 Website ini pakai Google Analytics (GA4) buat tracking pengunjung, bukan sistem custom — biar datanya lengkap (unique visitor, sumber traffic, demografi, dll) tanpa perlu bikin dashboard sendiri.
 
@@ -75,7 +75,26 @@ Website ini pakai Google Analytics (GA4) buat tracking pengunjung, bukan sistem 
 
 Setelah itu, buka dashboard Google Analytics kamu — data pengunjung mulai masuk beberapa menit setelah ada yang buka website kamu. Nggak perlu ubah kode apa-apa lagi, tinggal isi env variable-nya aja.
 
-## 9. Struktur folder singkat
+## 7. Akses khusus member (passcode)
+
+Halaman `/event` dan halaman detail tiap event (`/event/[slug]`) dikunci pakai passcode bersama. Pengunjung yang belum masukin passcode otomatis di-redirect ke `/event/access`.
+
+**Setup:**
+1. Tentuin passcode-nya (bebas, contoh: `mabaryuk2026`)
+2. Tambahin ke `.env.local`:
+   ```
+   EVENT_PASSCODE=mabaryuk2026
+   ```
+3. Tambahin juga environment variable yang sama di Vercel: **Settings → Environment Variables** → `EVENT_PASSCODE` = `mabaryuk2026`
+4. Redeploy
+
+**Cara kerja untuk pengunjung:**
+- Sekali masukin passcode yang benar, tersimpan di cookie selama **30 hari** — nggak perlu masukin ulang tiap buka web
+- Passcode dicek di server (bukan di kode yang bisa dibuka lewat browser), jadi nggak gampang ditebak/dibongkar dari inspect element
+
+**Cara ganti passcode kapan aja:** tinggal update value `EVENT_PASSCODE` di Vercel, redeploy, terus share passcode baru ke member lewat WA Channel. Member yang udah pernah masuk pakai passcode lama tetap bisa akses (cookie-nya masih valid) sampai 30 hari atau sampai mereka clear cookies — kalau mau langsung cabut akses semua orang, ganti nama cookie di `lib/eventAccess.ts` (`EVENT_ACCESS_COOKIE`) jadi string baru.
+
+## 8. Struktur folder singkat
 
 ```
 app/
@@ -90,7 +109,7 @@ lib/supabase/              → koneksi ke Supabase (browser, server, middleware)
 supabase/schema.sql        → skema database + seed data
 ```
 
-## 10. Cara kerja toggle & 2 tab admin
+## 9. Cara kerja toggle & 2 tab admin
 
 Ada 3 toggle per event, semuanya independen satu sama lain:
 

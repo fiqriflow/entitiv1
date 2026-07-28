@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, CalendarDays, MapPin, Clock, Wallet } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { hasEventAccess } from "@/lib/eventAccess";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import type { EventItem } from "@/types/event";
@@ -23,6 +24,11 @@ export default async function EventDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+
+  if (!(await hasEventAccess())) {
+    redirect(`/event/access?redirectTo=/event/${slug}`);
+  }
+
   const supabase = await createClient();
 
   const { data: event } = await supabase

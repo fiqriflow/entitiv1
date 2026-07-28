@@ -1,10 +1,16 @@
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { hasEventAccess } from "@/lib/eventAccess";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import EventCard from "@/components/EventCard";
 import type { EventItem } from "@/types/event";
 
 export default async function EventListPage() {
+  if (!(await hasEventAccess())) {
+    redirect("/event/access?redirectTo=/event");
+  }
+
   const supabase = await createClient();
   const { data: events } = await supabase
     .from("events")
