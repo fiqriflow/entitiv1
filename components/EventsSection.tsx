@@ -31,7 +31,7 @@ export default async function EventsSection() {
             href="/event"
             className="focus-ring flex shrink-0 items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-tosca hover:text-ink"
           >
-            Daftar dan Gabung Event
+            Join Event
             <ArrowRight size={15} />
           </Link>
         </div>
