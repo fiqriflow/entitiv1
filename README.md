@@ -79,20 +79,18 @@ Setelah itu, buka dashboard Google Analytics kamu — data pengunjung mulai masu
 
 Halaman `/event` dan halaman detail tiap event (`/event/[slug]`) dikunci pakai passcode bersama. Pengunjung yang belum masukin passcode otomatis di-redirect ke `/event/access`.
 
-**Setup:**
-1. Tentuin passcode-nya (bebas, contoh: `mabaryuk2026`)
-2. Tambahin ke `.env.local`:
-   ```
-   EVENT_PASSCODE=mabaryuk2026
-   ```
-3. Tambahin juga environment variable yang sama di Vercel: **Settings → Environment Variables** → `EVENT_PASSCODE` = `mabaryuk2026`
-4. Redeploy
+**Passcode-nya disimpan di database (bukan env var), jadi bisa diganti kapan aja langsung dari dashboard admin — nggak perlu redeploy.**
+
+**Setup awal:**
+1. Passcode default pas `schema.sql` pertama kali dijalankan: `entiti2026`
+2. Buka `/admin/dashboard`, di paling atas ada card **"Passcode Halaman Event"** — ganti ke passcode pilihan kamu, klik **Simpan**
+3. Share passcode itu ke member lewat WA Channel
 
 **Cara kerja untuk pengunjung:**
 - Sekali masukin passcode yang benar, tersimpan di cookie selama **30 hari** — nggak perlu masukin ulang tiap buka web
-- Passcode dicek di server (bukan di kode yang bisa dibuka lewat browser), jadi nggak gampang ditebak/dibongkar dari inspect element
+- Passcode dicek lewat database function khusus (`verify_event_passcode`) yang cuma balikin `true`/`false` — jadi passcode aslinya nggak pernah kekirim atau kebuka ke browser pengunjung, cuma admin yang login yang bisa lihat nilainya
 
-**Cara ganti passcode kapan aja:** tinggal update value `EVENT_PASSCODE` di Vercel, redeploy, terus share passcode baru ke member lewat WA Channel. Member yang udah pernah masuk pakai passcode lama tetap bisa akses (cookie-nya masih valid) sampai 30 hari atau sampai mereka clear cookies — kalau mau langsung cabut akses semua orang, ganti nama cookie di `lib/eventAccess.ts` (`EVENT_ACCESS_COOKIE`) jadi string baru.
+**Ganti passcode kapan aja:** buka dashboard admin → edit di card "Passcode Halaman Event" → Simpan. Member yang udah pernah masuk pakai passcode lama tetap bisa akses (cookie-nya masih valid) sampai 30 hari atau sampai mereka clear cookies sendiri.
 
 ## 8. Struktur folder singkat
 

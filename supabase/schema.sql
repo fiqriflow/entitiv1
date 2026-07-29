@@ -122,6 +122,59 @@ create policy "Admin bisa hapus banner"
   using ( bucket_id = 'event-banners' );
 
 -- ============================================
+-- Tabel settings umum (singleton, cuma 1 baris) — dipakai buat nyimpen
+-- passcode akses halaman event, biar bisa diubah dari dashboard admin
+-- ============================================
+create table if not exists public.app_settings (
+  id boolean primary key default true,
+  event_passcode text not null default 'entiti2026',
+  updated_at timestamptz not null default now(),
+  constraint app_settings_singleton check (id = true)
+);
+
+insert into public.app_settings (id, event_passcode)
+values (true, 'entiti2026')
+on conflict (id) do nothing;
+
+drop trigger if exists trg_app_settings_updated_at on public.app_settings;
+create trigger trg_app_settings_updated_at
+  before update on public.app_settings
+  for each row execute function public.set_updated_at();
+
+alter table public.app_settings enable row level security;
+
+-- Cuma admin (login) yang boleh lihat & ubah passcode-nya
+drop policy if exists "Admin bisa lihat settings" on public.app_settings;
+create policy "Admin bisa lihat settings"
+  on public.app_settings for select
+  to authenticated
+  using ( true );
+
+drop policy if exists "Admin bisa update settings" on public.app_settings;
+create policy "Admin bisa update settings"
+  on public.app_settings for update
+  to authenticated
+  using ( true )
+  with check ( true );
+
+-- Function verifikasi passcode: jalan dengan hak akses khusus (SECURITY DEFINER)
+-- jadi publik BISA manggil ini buat ngecek passcode, TAPI nggak akan pernah
+-- bisa baca isi passcode aslinya — cuma dapet balikan true/false.
+create or replace function public.verify_event_passcode(input_passcode text)
+returns boolean
+language sql
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.app_settings
+    where id = true and event_passcode = input_passcode
+  );
+$$;
+
+grant execute on function public.verify_event_passcode(text) to anon, authenticated;
+
+-- ============================================
 -- Catatan: fitur analytics custom (tabel analytics_events) sudah
 -- digantikan Google Analytics. Kalau kamu sempat menjalankan versi
 -- schema sebelumnya yang bikin tabel ini, aman dihapus dengan:

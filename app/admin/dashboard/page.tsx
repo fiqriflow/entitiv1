@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import AdminEventTabs from "@/components/admin/AdminEventTabs";
 import LogoutButton from "@/components/admin/LogoutButton";
+import PasscodeSettings from "@/components/admin/PasscodeSettings";
 import type { EventItem } from "@/types/event";
 
 export default async function AdminDashboardPage() {
@@ -20,6 +21,12 @@ export default async function AdminDashboardPage() {
     .from("events")
     .select("*")
     .order("event_date", { ascending: true });
+
+  const { data: settings } = await supabase
+    .from("app_settings")
+    .select("event_passcode")
+    .eq("id", true)
+    .single();
 
   return (
     <main className="min-h-screen bg-court">
@@ -42,6 +49,7 @@ export default async function AdminDashboardPage() {
       </header>
 
       <div className="mx-auto max-w-5xl px-6 py-10">
+        <PasscodeSettings initialPasscode={settings?.event_passcode ?? ""} />
         <AdminEventTabs initialEvents={(events ?? []) as EventItem[]} />
       </div>
     </main>
