@@ -24,14 +24,14 @@ export default async function EventsSection() {
               Event Kami
             </span>
             <h2 className="font-display mt-3 text-3xl font-semibold leading-tight text-ink md:text-4xl">
-              Event Berlangsung Minggu Ini
+              Event yang Tersedia
             </h2>
           </div>
           <Link
             href="/event"
             className="focus-ring flex shrink-0 items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-tosca hover:text-ink"
           >
-            Lihat Semua Event
+            Daftar dan Gabung Event
             <ArrowRight size={15} />
           </Link>
         </div>
