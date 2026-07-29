@@ -44,12 +44,12 @@ export default function Hero() {
           >
             Gabung & Main Bareng
           </a>
-          <Link
+          <a
             href="/#event"
             className="focus-ring rounded-full border border-white/25 px-7 py-3.5 text-center font-semibold text-white transition-colors hover:border-white/60"
           >
             Lihat Event
-          </Link>
+          </a>
         </div>
       </div>
     </section>
