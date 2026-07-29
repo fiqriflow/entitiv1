@@ -60,12 +60,12 @@ export default async function EventAccessPage({
         <p className="mt-6 text-sm text-ink-soft">
           Belum jadi member?{" "}
           <a
-            href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
+            href="https://forms.gle/XBADUs4gzHWkBhAZ6"
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-tosca hover:underline"
           >
-            Follow WA Channel
+            Gabung & Main Bareng
           </a>{" "}
           buat gabung dulu.
         </p>
