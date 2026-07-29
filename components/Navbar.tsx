@@ -16,10 +16,10 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden items-center gap-8 font-body text-sm font-medium text-ink-soft md:flex">
-          <a href="#event" className="transition-colors hover:text-tosca">
+          <a href="/#event" className="transition-colors hover:text-tosca">
             Event
-          </Link>
-          <a href="#tentang" className="transition-colors hover:text-tosca">
+          </a>
+          <a href="/#tentang" className="transition-colors hover:text-tosca">
             Tentang Kami
           </a>
         </nav>
