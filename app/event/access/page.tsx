@@ -65,7 +65,7 @@ export default async function EventAccessPage({
             rel="noopener noreferrer"
             className="font-semibold text-tosca hover:underline"
           >
-            Gabung & Main Bareng
+            Daftar jadi Entiti Member
           </a>{" "}
           buat gabung dulu.
         </p>
