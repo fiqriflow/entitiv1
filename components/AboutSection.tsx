@@ -11,9 +11,7 @@ export default function AboutSection() {
           </h2>
         </div>
         <p className="text-lg leading-relaxed text-ink-soft">
-          Entiti adalah
-          ekosistem bagi siapa saja yang ingin bugar, berkembang, dan
-          menambah relasi sosial di Ciamis.
+          Entiti adalah Komunitas Badminton Ciamis untuk bermain, berolahraga, dan menambah relasi.
         </p>
       </div>
     </section>
