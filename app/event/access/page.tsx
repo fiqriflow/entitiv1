@@ -2,6 +2,7 @@ import { Lock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { verifyEventPasscode } from "./actions";
+import PasscodeInput from "./PasscodeInput";
 
 export default async function EventAccessPage({
   searchParams,
@@ -34,14 +35,7 @@ export default async function EventAccessPage({
           className="mt-8 flex w-full flex-col gap-3"
         >
           <input type="hidden" name="redirectTo" value={redirectTo} />
-          <input
-            type="password"
-            name="passcode"
-            required
-            autoFocus
-            placeholder="Masukin passcode"
-            className="focus-ring w-full rounded-lg border border-black/10 px-4 py-3 text-center text-sm"
-          />
+          <PasscodeInput />
 
           {hasError && (
             <p className="text-sm font-medium text-red-600">
@@ -60,12 +54,12 @@ export default async function EventAccessPage({
         <p className="mt-6 text-sm text-ink-soft">
           Belum jadi member?{" "}
           <a
-            href="https://forms.gle/XBADUs4gzHWkBhAZ6"
+            href="https://whatsapp.com/channel/GANTI_DENGAN_LINK_WA_CHANNEL"
             target="_blank"
             rel="noopener noreferrer"
             className="font-semibold text-tosca hover:underline"
           >
-            Daftar jadi Entiti Member
+            Follow WA Channel
           </a>{" "}
           buat gabung dulu.
         </p>
