@@ -1,4 +1,4 @@
-import { MessageCircleMore, CalendarSearch, Wallet, PartyPopper } from "lucide-react";
+import { MessageCircleMore, CalendarSearch, Wallet, PartyPopper, Edit } from "lucide-react";
 
 const STEPS = [
   {
@@ -14,10 +14,10 @@ const STEPS = [
       "Cek jadwal mabar minggu ini, pilih yang cocok sama level dan waktu luang kamu.",
   },
   {
-    icon: Wallet,
-    title: "Daftar & Bayar HTM",
+    icon: Edit,
+    title: "Daftar",
     description:
-      "Isi form pendaftaran, bayar HTM sesuai info di event, slot terbatas jadi gercep ya.",
+      "Isi form pendaftaran yang tersedia di setiap event, slot terbatas jadi gercep ya.",
   },
   {
     icon: PartyPopper,

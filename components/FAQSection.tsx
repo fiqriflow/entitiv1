@@ -4,12 +4,12 @@ const FAQS = [
   {
     question: "Apakah harus jadi member dulu buat ikut mabar?",
     answer:
-      "Nggak wajib. Siapa aja boleh ikut mabar, tinggal follow WA Channel biar dapet info jadwal terbaru dan daftar lewat form di tiap event.",
+      "Ya, wajib daftar member dulu untuk pendataan dan mempermudah proses join mabar. Setelah itu, follow WA Channel untuk info jadwal terbaru.",
   },
   {
     question: "Peralatan apa aja yang perlu dibawa?",
     answer:
-      "Bawa raket sendiri kalau punya, sepatu olahraga (indoor, sol nggak ninggalin bekas), dan baju ganti. Shuttlecock biasanya udah disediakan sesuai info di tiap event.",
+      "Bawa raket, sepatu indoor, dan baju ganti. Shuttlecock biasanya sudah disediakan sesuai info event.",
   },
   {
     question: "Saya masih pemula banget, boleh ikut?",
@@ -19,12 +19,12 @@ const FAQS = [
   {
     question: "Gimana cara daftar event?",
     answer:
-      "Buka halaman detail event yang kamu mau ikutin, klik tombol \"Join Mabar\", nanti diarahkan ke form pendaftaran (Google Form atau WhatsApp).",
+      "Buka halaman utama entiti.my.id, klik tombol \"Join Mabar\", nanti diarahkan ke halaman event yang tersedia untuk pendaftaran join mabar (Google Form).",
   },
   {
     question: "Bisa daftar dadakan / on the spot?",
     answer:
-      "Tergantung sisa slot di masing-masing event. Karena slot terbatas, disaranin daftar dari jauh-jauh hari lewat form biar nggak kehabisan tempat.",
+      "Tidak bisa. Pendaftaran mabar wajib dilakukan terlebih dahulu melalui form.",
   },
 ];
 

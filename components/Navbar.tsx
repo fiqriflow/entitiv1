@@ -41,7 +41,7 @@ export default function Navbar() {
             href="/event"
             className="focus-ring rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-tosca"
           >
-            Join Event
+            Join Mabar
           </Link>
 
           <button
