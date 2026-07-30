@@ -29,7 +29,7 @@ const STEPS = [
 
 export default function WorkflowSection() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-24">
+    <section id="workflow" className="mx-auto max-w-6xl px-6 py-24">
       <div className="mb-14 max-w-xl">
         <span className="font-display text-sm font-semibold uppercase tracking-widest text-tosca">
           Cara Ikutan
